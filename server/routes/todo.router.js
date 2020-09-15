@@ -14,4 +14,16 @@ router.get('/', (req, res) =>{
         });
 });
 
+router.post('/', (req, res) =>{
+    const {description} = req.body;
+    const sqlText = `INSERT INTO todo ("description") VALUES ($1)`
+    pool.query(sqlText, [description])
+        .then((result) =>{
+            res.sendStatus(201)
+        })
+        .catch((error)=>{
+            console.log(`error making database query ${sqlText}`, error)
+        })
+})
+
 module.exports = router;
