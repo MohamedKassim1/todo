@@ -14,6 +14,21 @@ router.get('/', (req, res) =>{
             res.sendStatus(500);
         });
 });
+
+//get a specific todo
+router.get('/:id', (req, res)=>{
+    const {id} = req.params;
+    const sqlText = `SELECT * FROM todo WHERE todo_id = $1`;
+    pool.query(sqlText, [id])
+        .then((result) =>{
+            res.send(result.rows)
+        })
+        .catch((error)=>{
+            console.log(`error with get a todo ${sqlText}`, error);
+            
+        })
+})
+
 //to create todo
 router.post('/', (req, res) =>{
     const {description} = req.body;
@@ -40,4 +55,18 @@ router.put('/:id', (req, res) =>{
             
         })
 })
+//to delete a todo
+router.delete('/:id', (req, res) =>{
+    const {id} = req.params;
+    const sqlText = `DELETE FROM todo WHERE todo_id = $1`
+    pool.query(sqlText, [id])
+        .then((result) =>{
+            res.sendStatus(200)
+        })
+        .catch((error)=>{
+            console.log(`error with deleting a todo ${sqlText}`, error);
+            
+        })
+})
+
 module.exports = router;
