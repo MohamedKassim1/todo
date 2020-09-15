@@ -9,7 +9,7 @@ app.use(bodyParser.json()); // helps us with accessing req.body
 app.use(express.static('build'));
 
 //Express Routes
-app.use('/', todos)
+app.use('/todos', todos)
 
 app.listen(PORT, () =>{
     console.log("live on port 5000")
