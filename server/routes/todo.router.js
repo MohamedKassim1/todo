@@ -31,7 +31,9 @@ router.get('/:id', (req, res)=>{
 
 //to create todo
 router.post('/', (req, res) =>{
+    console.log(req.body)
     const {description} = req.body;
+    
     const sqlText = `INSERT INTO todo ("description") VALUES ($1)`
     pool.query(sqlText, [description])
         .then((result) =>{
