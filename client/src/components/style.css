@@ -9,3 +9,14 @@
     
     
 }
+
+.btn-primary{
+    padding: 0;
+    color: yellow;
+    
+}
+
+.editBtn{
+    color: orange;
+    cursor: pointer;
+}

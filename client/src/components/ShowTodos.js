@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash} from "react-icons/fa";
 import './style.css'
+import EditTodo from './EditTodo';
 const ShowTodos = () => {
     const [todos, setTodos] = useState([])
     //to get the todos
@@ -16,6 +17,7 @@ const ShowTodos = () => {
         const res = await axios.delete(`http://localhost:5000/todos/${id}`)
         console.log(res)
     }
+
     useEffect(() =>{
         getTodos()
     }, [todos]);
@@ -33,7 +35,7 @@ const ShowTodos = () => {
       {todos.map(todo => (
         <tr key={todo.todo_id}>
             <td>{todo.description}</td>
-            <td><FaEdit/></td>
+            <td><EditTodo todo={todo}/></td>
             <td><FaTrash className={"trashStyle"} onClick={() => deleteTodo(todo.todo_id)} cursor={"pointer"}/></td>
         </tr>
       ))}
